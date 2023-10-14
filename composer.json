@@ -2,7 +2,7 @@
     "name": "apnem19/ssh-connect",
     "description": "SSH connect",
     "license": "GPL-3.0-only",
-    "version": "1.0.0",
+    "versions": "1.0.0",
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {

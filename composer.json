@@ -1,0 +1,20 @@
+{
+    "name": "apnem19/ssh-connect",
+    "description": "SSH connect",
+    "license": "GPL-3.0-only",
+    "autoload": {
+        "psr-4": {
+            "Apnem19\\SshConnect\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "apnem19",
+            "email": "apnem19@vk.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "phpseclib/phpseclib": "^2.0"
+    }
+}

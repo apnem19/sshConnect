@@ -2,6 +2,7 @@
     "name": "apnem19/ssh-connect",
     "description": "SSH connect",
     "license": "GPL-3.0-only",
+    versions: "1.0.0",
     "autoload": {
         "psr-4": {
             "Apnem19\\SshConnect\\": "src/"

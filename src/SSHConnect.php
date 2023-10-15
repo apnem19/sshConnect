@@ -6,39 +6,30 @@ use phpseclib\Crypt\RSA;
 use phpseclib\Net\SCP;
 use phpseclib\Net\SSH2;
 
-class SSHConnect{
-	private $hostname;
-    private $port = 22;
-    private $username;
-    private $password;
-    private $timeout;
-	private $output;
-	private $error;
-	
-	public function __construct($hostname, $username, $password, $port, $timeout) {
-		$this->server = $hostname;
-		$this->username = $username;
-		$this->password = $password;
-		$this->timeout = $timeout;
-		$this->port = $port;
-	}
-	
-	public function connect() {
-		$ssh = new SSH2($this->server, $this->port);
-		if ($ssh->login($this->username, $this->password)) {
-			return $ssh;
-		}
-		
-		return "Ошибка: Не удалось соединиться с сервером!";
-	}
-	
-	public function exec($exec) {
-		$ssh->enableQuietMode();
-		$this->output = $ssh->exec($exec);
-		$this->error = $ssh->getStdError();
-	}
-	
-	public function getRawOutput(): string
+class SSHConnect
+{
+    private mixed $output;
+    private mixed $error;
+    private SSH2 $ssh;
+
+    public function __construct(string $hostname, string $username, string $password, int $port = 22, int $timeout)
+    {
+        $ssh = new SSH2($hostname, $port);
+        if ($ssh->login($username, $password)) {
+             $this->ssh = $ssh;
+        } else {
+            throw new \RuntimeException('Unable to connect to server');
+        }
+    }
+
+    public function exec($exec): void
+    {
+        $this->ssh->enableQuietMode();
+        $this->output = $this->ssh->exec($exec);
+        $this->error = $this->ssh->getStdError();
+    }
+
+    public function getRawOutput(): string
     {
         return $this->output;
     }
@@ -57,5 +48,9 @@ class SSHConnect{
     {
         return trim($this->getRawError());
     }
+
+    public function __debugInfo(): array
+    {
+        return ['output' => $this->getRawOutput(), 'error' => $this->getRawError()];
+    }
 }
-?>

@@ -1,10 +1,8 @@
 <?php
-
-$connect = new SSHConnect('ip', 'login', 'password', 'port'); //Connecting to SSH
-$first = $connect->exec('ls /root'); //Execute the command
-if(isset($first->getError())){ // Checking for errors
-  echo $first->getError(); // Displaying the error text
-}
-echo $first->getOutput() //We get the answer
-
+$connect = new SSHConnect('ip', 'login', 'password', 'port'); //Connecting to SSH <br>
+$first = $connect->exec('ls /root'); //Execute the command<br>
+if(isset($first->getError())){ // Checking for errors<br>
+  echo $first->getError(); // Displaying the error text<br>
+}<br>
+echo $first->getOutput() //We get the answer<br>
 ?>

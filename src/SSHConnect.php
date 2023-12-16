@@ -10,28 +10,15 @@ class SSHConnect
     private mixed $output;
     private mixed $error;
     private SSH2|SFTP $ssh;
-	public const TYPE_SFTP = "SFTP";
-	public const TYPE_SSH = "SSH";
 	
-    public function __construct(string $type, string $hostname, string $username, string $password, int $port = 22)
+    public function __construct(string $hostname, string $username, string $password, int $port = 22)
     {
-		if($type == self::TYPE_SFTP){
-			$sftp = new SFTP($hostname);
-			if ($sftp->login($username, $password)) {
-				 $this->ssh = $sftp;
-			} else {
-				throw new \RuntimeException('Unable to connect to server');
-			}
-		}elseif($type == self::TYPE_SSH){
-			$ssh = new SSH2($hostname, $port);
-			if ($ssh->login($username, $password)) {
-				 $this->ssh = $ssh;
-			} else {
-				throw new \RuntimeException('Unable to connect to server');
-			}
-		}else{
-			throw new \RuntimeException('Error TYPE');
-		}
+	$ssh = new SSH2($hostname, $port);
+	if ($ssh->login($username, $password)) {
+		 $this->ssh = $ssh;
+	} else {
+		throw new \RuntimeException('Unable to connect to server');
+	}
     }
 
     public function exec($exec): void

@@ -1,6 +1,6 @@
 <?php
 
-namespace apnem19\SSHConnect;
+namespace Apnem19\SshConnect;
 
 use phpseclib\Net\SSH2;
 use phpseclib\Net\SFTP;
